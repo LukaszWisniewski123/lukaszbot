@@ -11,7 +11,7 @@ Bot::Bot(){
     Bot::m_enemyPos = Bot::findEnemyPos(Bot::m_vMap);
 }
 
-std::pair<int,int> Bot::findEnemyPos(std::vector<std::string> &vMap){
+std::pair<int,int> Bot::findEnemyPos(const std::vector<std::string> &vMap){
     std::pair<int, int> enemyPos;
     for(int i = 0; i < vMap.size(); ++i){
         std::string sTempString = vMap[i];
@@ -27,7 +27,7 @@ std::pair<int,int> Bot::findEnemyPos(std::vector<std::string> &vMap){
     return enemyPos;
 }
 
-std::pair<int, int> Bot::findMyPos(std::vector<std::string> &vMap){
+std::pair<int, int> Bot::findMyPos(const std::vector<std::string> &vMap){
     std::pair<int, int> mypos;
     for(int i = 0; i < vMap.size(); ++i){
         std::string sTempStrig = vMap[i];
@@ -39,7 +39,6 @@ std::pair<int, int> Bot::findMyPos(std::vector<std::string> &vMap){
             }
         }
     }
-    std::cout<<"myPos: " <<mypos.first <<" x "<<mypos.second<<std::endl;
     return mypos;
 }
 

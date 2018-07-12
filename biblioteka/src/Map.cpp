@@ -32,7 +32,7 @@ bool Map::isWall(std::pair<int, int> coords){
     }
 }
 
-std::pair<int, int> Map::findMapSize(std::string &mapSizeLine){
+std::pair<int, int> Map::findMapSize(const std::string &mapSizeLine){
     int size[2];
     std::pair<int, int> psize;
     std::string sSize;

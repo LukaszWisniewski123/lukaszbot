@@ -16,8 +16,8 @@ namespace Lukasz{
         std::pair<int, int> m_enemyPos;
 
         void BFS(std::pair<int, int> startPoint, std::pair<int,int> target, std::vector<std::string> &sMap);
-        std::pair<int,int> findEnemyPos(std::vector<std::string> &vMap);
-        std::pair<int,int> findMyPos(std::vector<std::string> &vMap);
+        std::pair<int,int> findEnemyPos(const std::vector<std::string> &vMap);
+        std::pair<int,int> findMyPos(const std::vector<std::string> &vMap);
     };
 }
 #endif

@@ -13,7 +13,7 @@ namespace Lukasz{
         std::vector<std::string> getMap();
         std::pair<int, int> getMapSize();
     private:
-        std::pair<int, int> findMapSize(std::string &mapSizeLine);
+        std::pair<int, int> findMapSize(const std::string &mapSizeLine);
         std::pair<int, int> m_mapSize;
     };
 }
