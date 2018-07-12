@@ -1,14 +1,23 @@
+#ifndef MYBOT_H
+#define MYBOT_H
+
+#include"Map.hpp"
 #include<stack>
-#include<iostream>
-#include<vector>
+
 namespace Lukasz{
     class Bot{
     public:
         Bot();
-        void getEnemyPos();
-        void getMyPos();
+        void m_move(char moveSign);
     private:
-        void DFS(std::stack<int> stack);
-        std::vector<std::vector<int>> v(4, std::vector<int>(4));
+        Map m_mMap;
+        std::vector<std::string> m_vMap;
+        std::pair<int, int> m_myPos;
+        std::pair<int, int> m_enemyPos;
+
+        void BFS(std::pair<int, int> startPoint, std::pair<int,int> target, std::vector<std::string> &sMap);
+        std::pair<int,int> findEnemyPos(std::vector<std::string> &vMap);
+        std::pair<int,int> findMyPos(std::vector<std::string> &vMap);
     };
 }
+#endif

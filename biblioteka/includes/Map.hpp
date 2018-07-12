@@ -9,12 +9,10 @@ namespace Lukasz{
     
     class Map{
     public:
-        void getMap();
-        bool isWall(std::pair<int, int> cords);
+        std::vector<std::string> getMap();
+        bool isWall(std::pair<int, int> coords);
     private:
         std::vector<std::string> vMap;
-        void getMapSize(std::string &tempMapSize);
-
     };
 }
 #endif 

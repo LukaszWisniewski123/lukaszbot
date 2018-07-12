@@ -4,20 +4,25 @@
 
 using namespace Lukasz;
 
-void Map::getMap(){
+std::vector<std::string> Map::getMap(){
     std::string sTempMapSize;
     std::string sTempMap;
+
+    std::vector<std::string> vTempMap;
+
     std::getline(std::cin, sTempMapSize);
 
     while(std::getline(std::cin, sTempMap)){
-        Map::vMap.push_back(sTempMap);
+        vTempMap.push_back(sTempMap);
     }
+    return vTempMap;
 }
 
 bool Map::isWall(std::pair<int, int> coords){
-    std::string sTemp = Map::vMap[coords.first];
+    std::vector<std::string> vTempMap = Map::getMap();
+    std::string sTempMap = vTempMap[coords.first];
 
-    if(sTemp[coords.second] == '#'){
+    if(sTempMap[coords.second] == '#'){
         return true;
     }
     else{
