@@ -1,4 +1,7 @@
-#include"../biblioteka/includes/Bot.hpp"
+#include"../includes/Bot.hpp"
+
+#include<queue>
+
 
 using namespace Lukasz;
 
@@ -38,3 +41,10 @@ std::pair<int, int> Bot::findMyPos(std::vector<std::string> &vMap){
     return mypos;
 }
 
+void Bot::move(){
+    Bot::BFS(Bot::m_myPos, Bot::m_enemyPos, Bot::m_vMap);
+}
+
+void Bot::BFS(std::pair<int, int> startPoint, std::pair<int,int> target, std::vector<std::string> &sMap){
+
+}

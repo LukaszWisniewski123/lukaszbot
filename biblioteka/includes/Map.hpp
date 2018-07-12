@@ -11,8 +11,6 @@ namespace Lukasz{
     public:
         std::vector<std::string> getMap();
         bool isWall(std::pair<int, int> coords);
-    private:
-        std::vector<std::string> vMap;
     };
 }
 #endif 

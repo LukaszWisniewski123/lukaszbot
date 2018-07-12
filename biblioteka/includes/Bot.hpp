@@ -8,7 +8,8 @@ namespace Lukasz{
     class Bot{
     public:
         Bot();
-        void m_move(char moveSign);
+        void move();
+        
     private:
         Map m_mMap;
         std::vector<std::string> m_vMap;

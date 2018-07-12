@@ -1,4 +1,4 @@
-#include"../biblioteka/includes/Map.hpp"
+#include"../includes/Map.hpp"
 
 #include<sstream>
 
