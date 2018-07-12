@@ -61,3 +61,4 @@ void Bot::printBoolMap(){
         std::cerr<<std::endl;
     }
 }
+//test
