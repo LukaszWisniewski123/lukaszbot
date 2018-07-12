@@ -23,6 +23,7 @@ std::pair<int,int> Bot::findEnemyPos(std::vector<std::string> &vMap){
             }
         }
     }
+    std::cout<<"enemyPos: " <<enemyPos.first <<" x "<<enemyPos.second<<std::endl;
     return enemyPos;
 }
 
@@ -38,6 +39,7 @@ std::pair<int, int> Bot::findMyPos(std::vector<std::string> &vMap){
             }
         }
     }
+    std::cout<<"myPos: " <<mypos.first <<" x "<<mypos.second<<std::endl;
     return mypos;
 }
 
