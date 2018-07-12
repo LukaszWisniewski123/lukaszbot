@@ -1,5 +1,4 @@
 #include"../includes/Bot.hpp"
-
 #include<queue>
 
 
@@ -9,6 +8,9 @@ Bot::Bot(){
     Bot::m_vMap = Bot::m_mMap.getMap();
     Bot::m_myPos = Bot::findMyPos(Bot::m_vMap);
     Bot::m_enemyPos = Bot::findEnemyPos(Bot::m_vMap);
+    std::pair<int, int> mapSize;
+    mapSize = Bot::m_mMap.getMapSize();
+    Bot::m_boolCopyMap = std::vector<std::vector<bool>>(mapSize.first, std::vector<bool>(mapSize.second));
 }
 
 std::pair<int,int> Bot::findEnemyPos(const std::vector<std::string> &vMap){
@@ -23,7 +25,6 @@ std::pair<int,int> Bot::findEnemyPos(const std::vector<std::string> &vMap){
             }
         }
     }
-    std::cout<<"enemyPos: " <<enemyPos.first <<" x "<<enemyPos.second<<std::endl;
     return enemyPos;
 }
 
@@ -48,4 +49,15 @@ void Bot::move(){
 
 void Bot::BFS(std::pair<int, int> startPoint, std::pair<int,int> target, std::vector<std::string> &sMap){
 
+}
+
+void Bot::printBoolMap(){
+    std::pair<int, int> size;
+    size = m_mMap.getMapSize();
+    for(int i =0; i < size.first; ++i){
+        for(int j = 0; j < size.second; ++j){
+            std::cerr<<Bot::m_boolCopyMap[i][j];
+        }
+        std::cerr<<std::endl;
+    }
 }
