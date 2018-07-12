@@ -14,7 +14,7 @@ namespace Lukasz{
     private:
         std::vector<std::string> vMap;
         void getMapSize(std::string &tempMapSize);
-        int iMapSize[2];
+
     };
 }
 #endif 
