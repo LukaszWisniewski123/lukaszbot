@@ -1,9 +1,8 @@
-#include"biblioteka/includes/Bot.hpp"
-
+#include"biblioteka/includes/Map.hpp"
 using namespace Lukasz;
 
 int main(){
 
-    Bot bot;
+    std::cout<<"4"<<std::endl;
     return 0;
 }
