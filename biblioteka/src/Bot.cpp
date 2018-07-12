@@ -11,8 +11,9 @@ Bot::Bot(){
     std::pair<int, int> mapSize;
     mapSize = Bot::m_mMap.getMapSize();
     Bot::m_boolCopyMap = std::vector<std::vector<bool>>(mapSize.first, std::vector<bool>(mapSize.second));
+    Bot::printBoolMap();
 }
-
+    
 std::pair<int,int> Bot::findEnemyPos(const std::vector<std::string> &vMap){
     std::pair<int, int> enemyPos;
     for(int i = 0; i < vMap.size(); ++i){
@@ -61,4 +62,3 @@ void Bot::printBoolMap(){
         std::cerr<<std::endl;
     }
 }
-//test
