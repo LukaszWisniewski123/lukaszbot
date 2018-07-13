@@ -3,6 +3,7 @@ using namespace Lukasz;
 
 int main(){
     Bot b;
-    std::cout<<"4"<<std::endl;
+    b.move();
+    //std::cout<<"4"<<std::endl;
     return 0;
 }

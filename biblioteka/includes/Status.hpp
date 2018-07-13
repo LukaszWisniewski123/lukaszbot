@@ -2,9 +2,11 @@
 #define STATUS_H
 
 namespace Lukasz{
-    class Satus{
+    class Status{
     public:
-        
+        Status();
+        int pathLength;
+        char moves;
     };
 }
 
