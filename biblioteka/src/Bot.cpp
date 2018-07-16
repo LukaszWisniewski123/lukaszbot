@@ -4,12 +4,12 @@
 using namespace Lukasz;
 
 Bot::Bot(){
-    Bot::m_vMap = Bot::m_mMap.findMap();
-    Bot::m_myPos = Bot::findMyPos(Bot::m_vMap);
-    Bot::m_enemyPos = Bot::findEnemyPos(Bot::m_vMap);
+    m_vMap = Bot::m_mMap.findMap();
+    m_myPos = findMyPos(Bot::m_vMap);
+    m_enemyPos = findEnemyPos(Bot::m_vMap);
     std::pair<int, int> mapSize;
-    mapSize = Bot::m_mMap.getMapSize();
-    Bot::m_boolCopyMap = std::vector<std::vector<bool>>(mapSize.first, std::vector<bool>(mapSize.second));
+    mapSize = m_mMap.getMapSize();
+    m_boolCopyMap = std::vector<std::vector<bool>>(mapSize.first, std::vector<bool>(mapSize.second));
 }
     
 std::pair<int,int> Bot::findEnemyPos(const std::vector<std::string> &vMap){
@@ -78,49 +78,62 @@ bool Bot::isTheSamePos(const std::pair<int,int>pos1, const std::pair<int, int> p
 
 void Bot::BFS(std::pair<int, int> startPoint, std::pair<int,int> target, std::vector<std::string> &sMap){
     
-    std::cout<<"target: " <<target.first << " x " << target.second <<std::endl;
+    std::cerr<<"target: " <<target.first << " x " << target.second <<std::endl;
 
 typedef std::pair<int, int> position;
 
     position myNewPos;
-    myNewPos = startPoint;
-    setOnBoolMap(myNewPos);
+
     std::queue<position> posQueue;
 
     posQueue.push(startPoint);
 
+    int i = 1;
+    int krok =1;
     while(!posQueue.empty() && !isTheSamePos(myNewPos, target)){
+        myNewPos = posQueue.front();
+        posQueue.pop();
+
         position up = std::make_pair(myNewPos.first -1, myNewPos.second);
         position right = std::make_pair(myNewPos.first, myNewPos.second + 1);
         position down = std::make_pair(myNewPos.first +1, myNewPos.second);
         position left = std::make_pair(myNewPos.first, myNewPos.second -1 );
 
-        if(!m_mMap.isWall(up) && !fieldWasVisit(up)){
-            posQueue.push(up);
-            Bot::setOnBoolMap(up);
-        }
-        if(!m_mMap.isWall(right) && !fieldWasVisit(right)){
-            posQueue.push(right);
-            Bot::setOnBoolMap(right);
+        if(!m_mMap.isWall(left) && !fieldWasVisit(left)){
+            posQueue.push(left);
+            setOnBoolMap(left);
         }
         if(!m_mMap.isWall(down) && !fieldWasVisit(down)){
             posQueue.push(down);
-            Bot::setOnBoolMap(down);
+            setOnBoolMap(down);
         }
-        if(!m_mMap.isWall(left) && !fieldWasVisit(left)){
-            posQueue.push(left);
-            Bot::setOnBoolMap(left);
+        if(!m_mMap.isWall(right) && !fieldWasVisit(right)){
+            posQueue.push(right);
+            setOnBoolMap(right);
         }
-        myNewPos = posQueue.front();
+        if(!m_mMap.isWall(up) && !fieldWasVisit(up)){
+            posQueue.push(up);
+            setOnBoolMap(up);
+        }
+        
+        setOnBoolMap(myNewPos);
+        
+        std::cerr<<"====== "<< krok<<" ======"<<std::endl;
+        printBoolMap();
+        std::cerr<<"==============="<<std::endl;
         std::cerr<<"queue.size(): " << posQueue.size()<<" myNewPos: " <<myNewPos.first << " x " <<myNewPos.second<<std::endl;
 
-        posQueue.pop();
+        if(isTheSamePos(myNewPos, target)){
+            std::cerr<<"================================="<<std::endl;
+            std::cerr<<"znalazłem!:) i: " << i <<std::endl;
+            std::cerr<<"================================="<<std::endl;
+            i++;
+        }
+        krok++;
     }
-    
-    
 };
 
 void Bot::move(){
-    Bot::BFS(Bot::m_myPos, Bot::m_enemyPos, Bot::m_vMap);
+    BFS(Bot::m_myPos, Bot::m_enemyPos, Bot::m_vMap);
     std::cout<<"4"<<std::endl;
 }
