@@ -21,7 +21,7 @@ std::vector<std::string> Map::findMap(){
     return vTempMap;
 }
 
-bool Map::isWall(std::pair<int, int> coords){
+bool Map::isWall(position coords){
 
     std::string sTempMap = m_map[coords.first];
     if(sTempMap[coords.second] == '#'){
@@ -32,9 +32,9 @@ bool Map::isWall(std::pair<int, int> coords){
     }
 }
 
-std::pair<int, int> Map::findMapSize(const std::string &mapSizeLine){
+position Map::findMapSize(const std::string &mapSizeLine){
     int size[2];
-    std::pair<int, int> psize;
+    position psize;
     std::string sSize;
     std::istringstream isStream;
     isStream.str(mapSizeLine);

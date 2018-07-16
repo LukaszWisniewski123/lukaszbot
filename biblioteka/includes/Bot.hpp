@@ -5,6 +5,8 @@
 #include<stack>
 
 namespace Lukasz{
+    typedef std::pair<int, int> position;
+    
     class Bot{
     public:
         Bot();
@@ -14,17 +16,17 @@ namespace Lukasz{
         
         std::vector<std::vector<bool>> m_boolCopyMap;
         std::vector<std::string> m_vMap;
-        std::pair<int, int> m_myPos;
-        std::pair<int, int> m_enemyPos;
-        std::pair<int,int> findEnemyPos(const std::vector<std::string> &vMap);
-        std::pair<int,int> findMyPos(const std::vector<std::string> &vMap);
+        position m_myPos;
+        position m_enemyPos;
+        position findEnemyPos(const std::vector<std::string> &vMap);
+        position findMyPos(const std::vector<std::string> &vMap);
         
-        bool fieldWasVisit(const std::pair<int,int> coords);
+        bool fieldWasVisit(const position coords);
 
-        void BFS(std::pair<int, int> startPoint, std::pair<int,int> target, std::vector<std::string> &sMap);
+        void BFS(position startPoint, position target, std::vector<std::string> &sMap);
         void printBoolMap();
-        void setOnBoolMap(const std::pair<int,int> pos, bool var);
-        bool isTheSamePos(const std::pair<int, int> pos1, const std::pair<int,int> pos2);
+        void setOnBoolMap(const position pos, bool var);
+        bool isTheSamePos(const position pos1, const position pos2);
     };
 }
 #endif

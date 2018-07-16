@@ -1,19 +1,22 @@
 #include"../includes/Bot.hpp"
+
 #include<queue>
 #include<utility>
+
 using namespace Lukasz;
+
 
 Bot::Bot(){
     m_vMap = Bot::m_mMap.findMap();
     m_myPos = findMyPos(Bot::m_vMap);
     m_enemyPos = findEnemyPos(Bot::m_vMap);
-    std::pair<int, int> mapSize;
+    position mapSize;
     mapSize = m_mMap.getMapSize();
     m_boolCopyMap = std::vector<std::vector<bool>>(mapSize.first, std::vector<bool>(mapSize.second));
 }
     
-std::pair<int,int> Bot::findEnemyPos(const std::vector<std::string> &vMap){
-    std::pair<int, int> enemyPos;
+position Bot::findEnemyPos(const std::vector<std::string> &vMap){
+    position enemyPos;
     for(int i = 0; i < vMap.size(); ++i){
         std::string sTempString = vMap[i];
         for(int j = 0; j < sTempString.length(); ++j){
@@ -27,8 +30,8 @@ std::pair<int,int> Bot::findEnemyPos(const std::vector<std::string> &vMap){
     return enemyPos;
 }
 
-std::pair<int, int> Bot::findMyPos(const std::vector<std::string> &vMap){
-    std::pair<int, int> mypos;
+position Bot::findMyPos(const std::vector<std::string> &vMap){
+    position mypos;
     for(int i = 0; i < vMap.size(); ++i){
         std::string sTempStrig = vMap[i];
         for(int j = 0; j < sTempStrig.length(); ++j){
@@ -43,7 +46,7 @@ std::pair<int, int> Bot::findMyPos(const std::vector<std::string> &vMap){
 }
 
 void Bot::printBoolMap(){
-    std::pair<int, int> size;
+    position size;
     size = m_mMap.getMapSize();
     for(int i =0; i < size.first; ++i){
         for(int j = 0; j < size.second; ++j){
@@ -53,11 +56,11 @@ void Bot::printBoolMap(){
     }
 }
 
-void Bot::setOnBoolMap(const std::pair<int, int> pos, bool var=true){
+void Bot::setOnBoolMap(const position pos, bool var=true){
     Bot::m_boolCopyMap[pos.first][pos.second] = var;
 }
 
-bool Bot::fieldWasVisit(const std::pair<int,int> coords){
+bool Bot::fieldWasVisit(const position coords){
     if(Bot::m_boolCopyMap[coords.first][coords.second] == true){
         return true;
     }
@@ -66,7 +69,7 @@ bool Bot::fieldWasVisit(const std::pair<int,int> coords){
     }
 }
 
-bool Bot::isTheSamePos(const std::pair<int,int>pos1, const std::pair<int, int> pos2){
+bool Bot::isTheSamePos(const std::pair<int,int>pos1, const position pos2){
     if(pos1.first == pos2.first && pos1.second == pos2.second){
         return true;
     }
@@ -74,22 +77,15 @@ bool Bot::isTheSamePos(const std::pair<int,int>pos1, const std::pair<int, int> p
         return false;
     }
 }
-/*tymczasowao jest voidem, ale pewnie będe zwracał chara*/
 
-void Bot::BFS(std::pair<int, int> startPoint, std::pair<int,int> target, std::vector<std::string> &sMap){
+void Bot::BFS(position startPoint, position target, std::vector<std::string> &sMap){
     
-    std::cerr<<"target: " <<target.first << " x " << target.second <<std::endl;
-
-typedef std::pair<int, int> position;
-
     position myNewPos;
 
     std::queue<position> posQueue;
 
     posQueue.push(startPoint);
 
-    int i = 1;
-    int krok =1;
     while(!posQueue.empty() && !isTheSamePos(myNewPos, target)){
         myNewPos = posQueue.front();
         posQueue.pop();
@@ -115,21 +111,7 @@ typedef std::pair<int, int> position;
             posQueue.push(up);
             setOnBoolMap(up);
         }
-        
         setOnBoolMap(myNewPos);
-        
-        std::cerr<<"====== "<< krok<<" ======"<<std::endl;
-        printBoolMap();
-        std::cerr<<"==============="<<std::endl;
-        std::cerr<<"queue.size(): " << posQueue.size()<<" myNewPos: " <<myNewPos.first << " x " <<myNewPos.second<<std::endl;
-
-        if(isTheSamePos(myNewPos, target)){
-            std::cerr<<"================================="<<std::endl;
-            std::cerr<<"znalazłem!:) i: " << i <<std::endl;
-            std::cerr<<"================================="<<std::endl;
-            i++;
-        }
-        krok++;
     }
 };
 
