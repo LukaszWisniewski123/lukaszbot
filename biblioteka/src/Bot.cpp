@@ -137,6 +137,23 @@ void Bot::BFS(position startPoint, position target, std::vector<std::string> &sM
         std::cerr<<"myNewPos: " <<myNewPos.first << " x " <<myNewPos.second <<std::endl;
         std::cerr<<"parent: " <<parent.first << " x " <<parent.second <<std::endl;
         std::cerr<<"child: " <<child.first << " x " <<child.second <<std::endl;
+
+        position up = std::make_pair(myNewPos.first -1, myNewPos.second);
+        position right = std::make_pair(myNewPos.first, myNewPos.second + 1);
+        position down = std::make_pair(myNewPos.first +1, myNewPos.second);
+        position left = std::make_pair(myNewPos.first, myNewPos.second -1 );
+
+        std::cerr<<"up: " <<up.first << " x " <<up.second <<std::endl;
+        std::cerr<<"right: " <<right.first << " x " <<right.second <<std::endl;
+        std::cerr<<"down: " <<down.first << " x " <<down.second <<std::endl;
+        std::cerr<<"left: " <<left.first << " x " <<left.second <<std::endl;
+
+        if(isTheSamePos(child, up)){
+            std::cout<<"1"<<std::endl;
+        }
+        else if(isTheSamePos(child, right)){
+            std::cout<<"2"<<std::endl;
+        }
     }
 };
 
