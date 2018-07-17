@@ -79,14 +79,15 @@ bool Bot::isTheSamePos(const std::pair<int,int>pos1, const position pos2){
 }
 
 void Bot::BFS(position startPoint, position target, std::vector<std::string> &sMap){
-    
+    bool targeIsFind = false;
     position myNewPos;
-
+    const position mapSize = m_mMap.getMapSize();
     std::queue<position> posQueue;
-
+    std::vector<std::vector<position> > vParent(mapSize.first, std::vector<position>(mapSize.second));
+    
     posQueue.push(startPoint);
 
-    while(!posQueue.empty() && !isTheSamePos(myNewPos, target)){
+    while(!posQueue.empty()){
         myNewPos = posQueue.front();
         posQueue.pop();
 
@@ -96,26 +97,47 @@ void Bot::BFS(position startPoint, position target, std::vector<std::string> &sM
         position left = std::make_pair(myNewPos.first, myNewPos.second -1 );
 
         if(!m_mMap.isWall(left) && !fieldWasVisit(left)){
+            vParent[left.first][left.second] = myNewPos;
             posQueue.push(left);
             setOnBoolMap(left);
         }
         if(!m_mMap.isWall(down) && !fieldWasVisit(down)){
+            vParent[down.first][down.second] = myNewPos;
             posQueue.push(down);
             setOnBoolMap(down);
         }
         if(!m_mMap.isWall(right) && !fieldWasVisit(right)){
+            vParent[right.first][right.second] = myNewPos;
             posQueue.push(right);
             setOnBoolMap(right);
         }
         if(!m_mMap.isWall(up) && !fieldWasVisit(up)){
+            vParent[right.first][right.second] = myNewPos;
             posQueue.push(up);
             setOnBoolMap(up);
         }
         setOnBoolMap(myNewPos);
+        
+        printBoolMap();
+        std::cerr<<"============================"<<std::endl;
+
+        if(isTheSamePos(myNewPos, target)){
+            targeIsFind = true;
+            break;
+        }
+    }
+    if(targeIsFind){
+        position parent;
+        position child;
+        while(!isTheSamePos(myNewPos, m_myPos)){
+            parent = vParent[myNewPos.first][myNewPos.second];
+            child = myNewPos;
+            myNewPos = parent;
+        }
+        
     }
 };
 
 void Bot::move(){
     BFS(Bot::m_myPos, Bot::m_enemyPos, Bot::m_vMap);
-    std::cout<<"4"<<std::endl;
 }
