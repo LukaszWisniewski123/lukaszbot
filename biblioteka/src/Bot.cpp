@@ -134,7 +134,9 @@ void Bot::BFS(position startPoint, position target, std::vector<std::string> &sM
             child = myNewPos;
             myNewPos = parent;
         }
-        
+        std::cerr<<"myNewPos: " <<myNewPos.first << " x " <<myNewPos.second <<std::endl;
+        std::cerr<<"parent: " <<parent.first << " x " <<parent.second <<std::endl;
+        std::cerr<<"child: " <<child.first << " x " <<child.second <<std::endl;
     }
 };
 
