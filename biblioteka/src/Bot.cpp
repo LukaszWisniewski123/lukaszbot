@@ -112,50 +112,52 @@ void Bot::BFS(position startPoint, position target, std::vector<std::string> &sM
             setOnBoolMap(right);
         }
         if(!m_mMap.isWall(up) && !fieldWasVisit(up)){
-            vParent[right.first][right.second] = myNewPos;
+            vParent[up.first][up.second] = myNewPos;
             posQueue.push(up);
             setOnBoolMap(up);
         }
         setOnBoolMap(myNewPos);
         
-        printBoolMap();
-        std::cerr<<"============================"<<std::endl;
+        /*printBoolMap();
+        std::cerr<<"============================"<<std::endl;*/
 
         if(isTheSamePos(myNewPos, target)){
-            targeIsFind = true;
+            position parent;
+            position child;
+            while(!isTheSamePos(myNewPos, m_myPos)){
+                parent = vParent[myNewPos.first][myNewPos.second];
+                child = myNewPos;
+                myNewPos = parent;
+                /*std::cerr<<"parent: " << parent.first << " x " << parent.second <<std::endl;
+                std::cerr<<"child: " << child.first << " x " << child.second <<std::endl;
+                std::cerr<<"myNewPos: " << myNewPos.first << " x " <<myNewPos.second <<std::endl;*/
+            }
+
+            up = std::make_pair(myNewPos.first -1, myNewPos.second);
+            right = std::make_pair(myNewPos.first, myNewPos.second + 1);
+            down = std::make_pair(myNewPos.first +1, myNewPos.second);
+            left = std::make_pair(myNewPos.first, myNewPos.second -1 );
+
+            if(isTheSamePos(child, up)){
+                std::cout<<"1"<<std::endl;
+            }
+            else if(isTheSamePos(child, right)){
+                std::cout<<"2"<<std::endl;
+            }
+            else if(isTheSamePos(child, down)){
+                std::cout<<"3"<<std::endl;
+            }
+            else if(isTheSamePos(child, left)){
+                std::cout<<"4"<<std::endl;
+            }
+            else{
+                std::cerr<<"cos nie zadzialalo"<<std::endl;
+                return;
+            }
             break;
         }
     }
-    if(targeIsFind){
-        position parent;
-        position child;
-        while(!isTheSamePos(myNewPos, m_myPos)){
-            parent = vParent[myNewPos.first][myNewPos.second];
-            child = myNewPos;
-            myNewPos = parent;
-        }
-        std::cerr<<"myNewPos: " <<myNewPos.first << " x " <<myNewPos.second <<std::endl;
-        std::cerr<<"parent: " <<parent.first << " x " <<parent.second <<std::endl;
-        std::cerr<<"child: " <<child.first << " x " <<child.second <<std::endl;
-
-        position up = std::make_pair(myNewPos.first -1, myNewPos.second);
-        position right = std::make_pair(myNewPos.first, myNewPos.second + 1);
-        position down = std::make_pair(myNewPos.first +1, myNewPos.second);
-        position left = std::make_pair(myNewPos.first, myNewPos.second -1 );
-
-        std::cerr<<"up: " <<up.first << " x " <<up.second <<std::endl;
-        std::cerr<<"right: " <<right.first << " x " <<right.second <<std::endl;
-        std::cerr<<"down: " <<down.first << " x " <<down.second <<std::endl;
-        std::cerr<<"left: " <<left.first << " x " <<left.second <<std::endl;
-
-        if(isTheSamePos(child, up)){
-            std::cout<<"1"<<std::endl;
-        }
-        else if(isTheSamePos(child, right)){
-            std::cout<<"2"<<std::endl;
-        }
-    }
-};
+}
 
 void Bot::move(){
     BFS(Bot::m_myPos, Bot::m_enemyPos, Bot::m_vMap);
