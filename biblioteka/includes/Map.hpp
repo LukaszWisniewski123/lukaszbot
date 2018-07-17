@@ -5,6 +5,8 @@
 #include<string>
 #include<iostream>
 
+typedef std::pair<int,int> position;
+
 namespace Lukasz{
     
     class Map{
