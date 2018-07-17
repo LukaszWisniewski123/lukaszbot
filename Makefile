@@ -1,11 +1,11 @@
-lukasz.out: main.o Bot.o Map.o Status.o
+lukasz.out: main.o Bot.o Map.o Field.o
 	g++ -O2 $^ -o $@
 
-main.o: main.cpp Bot.o Map.o Status.o
+main.o: main.cpp Field.o Bot.o Map.o
 	g++ -c -g main.cpp
 
-Status.o: biblioteka/src/Status.cpp biblioteka/includes/Status.hpp
-	g++ -c biblioteka/src/Status.cpp
+Field.o: biblioteka/src/Field.cpp biblioteka/includes/Field.hpp
+	g++ -c biblioteka/src/Field.cpp
 
 Bot.o: biblioteka/src/Bot.cpp biblioteka/includes/Bot.hpp
 	g++ -c -g biblioteka/src/Bot.cpp
