@@ -5,7 +5,6 @@
 
 using namespace Lukasz;
 
-
 Bot::Bot(){
     m_vMap = Bot::m_mMap.findMap();
     m_myPos = findMyPos(Bot::m_vMap);
@@ -80,8 +79,10 @@ bool Bot::isTheSamePos(const std::pair<int,int>pos1, const position pos2){
 
 void Bot::BFS(position startPoint, position target, std::vector<std::string> &sMap){
     bool targeIsFind = false;
-    position myNewPos;
     const position mapSize = m_mMap.getMapSize();
+    
+    position myNewPos;
+    
     std::queue<position> posQueue;
     std::vector<std::vector<position> > vParent(mapSize.first, std::vector<position>(mapSize.second));
     
@@ -118,9 +119,6 @@ void Bot::BFS(position startPoint, position target, std::vector<std::string> &sM
         }
         setOnBoolMap(myNewPos);
         
-        /*printBoolMap();
-        std::cerr<<"============================"<<std::endl;*/
-
         if(isTheSamePos(myNewPos, target)){
             position parent;
             position child;
@@ -128,16 +126,13 @@ void Bot::BFS(position startPoint, position target, std::vector<std::string> &sM
                 parent = vParent[myNewPos.first][myNewPos.second];
                 child = myNewPos;
                 myNewPos = parent;
-                /*std::cerr<<"parent: " << parent.first << " x " << parent.second <<std::endl;
-                std::cerr<<"child: " << child.first << " x " << child.second <<std::endl;
-                std::cerr<<"myNewPos: " << myNewPos.first << " x " <<myNewPos.second <<std::endl;*/
             }
 
             up = std::make_pair(myNewPos.first -1, myNewPos.second);
             right = std::make_pair(myNewPos.first, myNewPos.second + 1);
             down = std::make_pair(myNewPos.first +1, myNewPos.second);
             left = std::make_pair(myNewPos.first, myNewPos.second -1 );
-
+            
             if(isTheSamePos(child, up)){
                 std::cout<<"1"<<std::endl;
             }
