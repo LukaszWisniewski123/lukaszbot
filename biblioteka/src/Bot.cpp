@@ -7,6 +7,8 @@ using namespace Lukasz;
 
 Bot::Bot(){
     m_vMap = Bot::m_mMap.findMap();
+    m_myPos = findMyPos(Bot::m_vMap);
+    m_enemyPos = findEnemyPos(Bot::m_vMap);
     position mapSize;
     mapSize = m_mMap.getMapSize();
     m_boolCopyMap = std::vector<std::vector<bool>>(mapSize.first, std::vector<bool>(mapSize.second));
