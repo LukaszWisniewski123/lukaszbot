@@ -7,8 +7,6 @@ using namespace Lukasz;
 
 Bot::Bot(){
     m_vMap = Bot::m_mMap.findMap();
-    m_myPos = findMyPos(Bot::m_vMap);
-    m_enemyPos = findEnemyPos(Bot::m_vMap);
     position mapSize;
     mapSize = m_mMap.getMapSize();
     m_boolCopyMap = std::vector<std::vector<bool>>(mapSize.first, std::vector<bool>(mapSize.second));
@@ -77,7 +75,17 @@ bool Bot::isTheSamePos(const std::pair<int,int>pos1, const position pos2){
     }
 }
 
-void Bot::BFS(position startPoint, position target, std::vector<std::string> &sMap){
+bool Bot::isEnemy(const std::vector<std::string>&vMap, const position pos){
+    char e ='2';
+    if(vMap[pos.first][pos.second] == e){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+void Bot::BFS(const position startPoint, const position target, const std::vector<std::string> &sMap){
     bool targeIsFind = false;
     const position mapSize = m_mMap.getMapSize();
     
