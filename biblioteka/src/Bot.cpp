@@ -163,7 +163,31 @@ void Bot::BFS(const position startPoint, const position target, const std::vecto
         }
     }
 }
+int Bot::BFS2(const position startPoint, const position target, const std::vector<std::string> &sMap){
+    int pathLen = 0;
+
+    return pathLen;
+}
 
 void Bot::move(){
-    BFS(Bot::m_myPos, Bot::m_enemyPos, Bot::m_vMap);
+    std::vector<int> vIPath;
+    
+    position up = std::make_pair(m_myPos.first -1, m_myPos.second);
+    position right = std::make_pair(m_myPos.first, m_myPos.second + 1);
+    position down = std::make_pair(m_myPos.first +1, m_myPos.second);
+    position left = std::make_pair(m_myPos.first, m_myPos.second -1 );
+
+    if(!m_mMap.isWall(left) && !fieldWasVisit(left)){
+        vIPath.push_back(BFS2(left, Bot::m_enemyPos, Bot::m_vMap));
+    }
+    if(!m_mMap.isWall(down) && !fieldWasVisit(down)){
+       vIPath.push_back(BFS2(down, Bot::m_enemyPos, Bot::m_vMap));
+    }
+    if(!m_mMap.isWall(right) && !fieldWasVisit(right)){
+        vIPath.push_back(BFS2(right, Bot::m_enemyPos, Bot::m_vMap));
+    }
+    if(!m_mMap.isWall(up) && !fieldWasVisit(up)){
+         vIPath.push_back(BFS2(up, Bot::m_enemyPos, Bot::m_vMap));
+    }
+    //BFS(Bot::m_myPos, Bot::m_enemyPos, Bot::m_vMap);
 }
